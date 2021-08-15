@@ -30,3 +30,18 @@ function add_theme_scripts_styles()
 	wp_enqueue_script('bootstrap_script', "https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js", array('jquery'), 2, true);
 }
 add_action('wp_enqueue_scripts', 'add_theme_scripts_styles');
+
+/**
+ * Register our sidebars and widgetized areas.
+ */
+function mytheme_widgets_init() {
+	register_sidebar( [
+		'name'          => 'Home right sidebar',
+		'id'            => 'home_right_1',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	] );
+}
+add_action( 'widgets_init', 'mytheme_widgets_init' );
