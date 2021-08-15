@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * Register Custom Navigation Walker
+ */
+function register_navwalker()
+{
+	require_once get_template_directory() . '/MyThemeMenuWalker.php';
+}
+add_action('after_setup_theme', 'register_navwalker');
+
 // Add theme menus positions
 function my_theme_setup()
 {
