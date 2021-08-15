@@ -64,3 +64,13 @@ function highlight_results($text){
 }
 add_filter('the_excerpt', 'highlight_results');
 add_filter('the_title', 'highlight_results');
+
+// Add atributes for post link paginates
+function previous_post_link_paginate($ars){
+	return $ars.' class="btn btn-outline-primary"';
+}
+add_filter('previous_posts_link_attributes', "previous_post_link_paginate");
+function next_post_link_paginate($ars){
+	return $ars.' class="btn btn-outline-primary"';
+}
+add_filter('next_posts_link_attributes', "next_post_link_paginate");
