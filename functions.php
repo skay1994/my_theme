@@ -51,3 +51,16 @@ function my_excerpt_length($length){
 	return 20;
 }
 add_filter('excerpt_length', 'my_excerpt_length');
+
+// Add Bold to searched term
+function highlight_results($text){
+	if (is_search()) {
+		$sr = get_query_var('s');
+		$keys = explode(' ', $sr);
+		$keys = array_filter($keys);
+		$text = preg_replace('/('.implode('|', $keys) .')/iu', '<span class="search-highlight">\0</span>', $text);
+	}
+	return $text;
+}
+add_filter('the_excerpt', 'highlight_results');
+add_filter('the_title', 'highlight_results');
