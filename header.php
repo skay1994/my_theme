@@ -1,12 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html <?php language_attributes(); ?>>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="<?= bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<!-- CSS only -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>Document</title>
+    <title><?= wp_title() . " - " . bloginfo('name') ?></title>
+	<?php wp_head(); ?>
 </head>
-<body>
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+            </div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark" href="<?= site_url() ?>"><?= bloginfo('name') ?></a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+	            <?php get_search_form(); ?>
+                <?php
+                if(!is_user_logged_in()) {
+                    echo '<a class="btn btn-sm btn-outline-secondary" href="'.site_url("wp-login.php") .'">'.__("Sign up").'</a>';
+                }
+                ?>
+            </div>
+        </div>
+    </header>
+</div>
