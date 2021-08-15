@@ -1,4 +1,13 @@
 <?php
+// Add theme menus positions
+function my_theme_setup()
+{
+	register_nav_menus([
+		'primary_menu' => __('Menu Primario'),
+		'top_menu' => __('Menu Topo'),
+	]);
+}
+add_action('after_setup_theme', 'my_theme_setup');
 
 // Add theme scrips and styles
 function add_theme_scripts_styles()
