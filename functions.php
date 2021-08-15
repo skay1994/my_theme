@@ -45,3 +45,9 @@ function mytheme_widgets_init() {
 	] );
 }
 add_action( 'widgets_init', 'mytheme_widgets_init' );
+
+// Customize excerpt post default
+function my_excerpt_length($length){
+	return 20;
+}
+add_filter('excerpt_length', 'my_excerpt_length');
