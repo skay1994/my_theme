@@ -53,8 +53,16 @@
 					?>
                 </div>
 
+                <nav class="blog-pagination" aria-label="Pagination">
+		            <?php
+		            previous_posts_link( 'Older posts' );
+		            next_posts_link( 'Newer posts' );
+		            ?>
+                </nav>
+
             </div>
 
+			<?php get_sidebar(); ?>
         </div>
 
     </main>
