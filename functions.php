@@ -74,3 +74,27 @@ function next_post_link_paginate($ars){
 	return $ars.' class="btn btn-outline-primary"';
 }
 add_filter('next_posts_link_attributes', "next_post_link_paginate");
+
+// custom paginate links
+function myCustomPaginate() {
+	$basePageinate = '<div class="btn-group" role="group" aria-label="Post Pagination">{links}</div>';
+	$links = paginate_links([
+		'mid_size'  => 2,
+		'prev_text' => __( 'Back', 'textdomain' ),
+		'next_text' => __( 'Onward', 'textdomain' ),
+		'type' => 'array'
+	]);
+	$formattedLinks = '';
+	foreach ($links as $link) {
+		if(strpos($link, 'class="prev page-numbers') || strpos($link, 'class="next page-numbers')) {
+			$link = str_replace(['class="prev page-numbers', 'class="next page-numbers', '">'], ['class="btn btn-primary', 'class="btn btn-primary', '" role="button">'], $link);
+		} elseif(strpos($link, 'aria-current="page" class="page-numbers current')) {
+			$link = str_replace(['class="page-numbers ', '">'], ['class="btn btn-primary disabled ', '" role="button" aria-disabled="true">'], $link);
+		} elseif(strpos($link, 'class="page-numbers')) {
+			$link = str_replace(['class="page-numbers', '">'], ['class="btn btn-outline-primary', '" role="button">'], $link);
+		}
+		$formattedLinks .= $link;
+	}
+
+	return str_replace('{links}', $formattedLinks, $basePageinate);
+}
